@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  aerospike:
+    image: aerospike/aerospike-server:latest
+    container_name: aerospike
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+      - "3002:3002"
+    restart: unless-stopped
+
+  tools:
+    image: aerospike/aerospike-tools:latest
+    depends_on:
+      - aerospike
+    entrypoint: ["bash", "-lc", "echo 'Use: docker compose run --rm tools aql -h aerospike' && sleep infinity"]
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    command: ["serve"]
+
+  app:
+    build: .
+    container_name: langgraph-aerospike-demo
+    depends_on:
+      - aerospike
+      - ollama
+    ports:
+      - "8000:8000"
+    environment:
+      - AEROSPIKE_HOST=aerospike
+      - AEROSPIKE_PORT=3000
+      - OLLAMA_BASE_URL=http://ollama:11434
+volumes:
+  ollama:
