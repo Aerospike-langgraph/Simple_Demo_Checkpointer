@@ -55,12 +55,14 @@ docker ps
 
 ```bash
 docker exec -it ollama bash
-```
-Right now in main.py we are using llama3. So we are pulling llama3 manifest. You can set the model which you want in docker yml file inside the app service. Can set the model using OLLAMA_MODEL in the environment.
-
-```bash
 ollama pull llama3
 ```
+Choosing the LLM Model:
+
+The app uses the model specified by the environment variable OLLAMA_MODEL.
+You can set this inside the app service in docker-compose.yml:
+
+Just update OLLAMA_MODEL to the model you want to use. (In docker yml file inside service environment)
 
 ## 4. Use the Chat API
 
