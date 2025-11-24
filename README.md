@@ -27,7 +27,11 @@ The `app` uses:
 - `AEROSPIKE_PORT=3000`
 - `OLLAMA_BASE_URL=http://ollama:11434`
 
----
+If you want to use the Aerospike checkpointer **outside Docker** (e.g., in a local virtualenv), you can install it directly from Git:
+
+```bash
+pip install git+https://github.com/Aerospike-langgraph/checkpointer.git
+```
 
 ## 1. Build the app image
 
