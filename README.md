@@ -12,7 +12,7 @@ Even if you stop/restart the **app** container, the conversation continues becau
 
 ---
 
-## 📦 Services
+## Services
 
 `docker-compose.yml` runs:
 
